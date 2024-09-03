@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本のアプリ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- モーダルウィンドウ -->
+    <div id="modal">
+        <button id="startButton">スタート</button>
+        <div id="countdown"></div>
+    </div>
+
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-item">
+            <div id="coin-counter">
+                <span id="coin-icon">
+                    <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="coinGradient" cx="50%" cy="50%" r="50%" fx="25%" fy="25%">
+                                <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+                            </radialGradient>
+                            <filter id="coinShine">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="1.7" result="blur" />
+                                <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75" 
+                                                    specularExponent="20" lighting-color="#FFFFFF"  
+                                                    result="specOut">
+                                    <fePointLight x="25" y="17" z="34"/>
+                                </feSpecularLighting>
+                                <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut2"/>
+                                <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" 
+                                             k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+                            </filter>
+                        </defs>
+                        
+                        <circle cx="30" cy="30" r="27.5" fill="url(#coinGradient)" 
+                                stroke="#DAA520" stroke-width="1.7" filter="url(#coinShine)"/>
+                        
+                        <text x="30" y="36" font-family="Arial, sans-serif" font-size="20.5" 
+                              font-weight="bold" text-anchor="middle" fill="#8B4513">👍</text>
+                        
+                        <ellipse cx="30" cy="10" rx="12" ry="3.5" fill="#FFFFFF" opacity="0.3" />
+                    </svg>
+                </span> 
+                <span id="count">0</span></div>
+        </div>
+        <div class="header-item">残り <span id="timer">30</span> 秒</div>
+        <div class="header-item">
+            <svg class="icon" id="heart-icon" width="60" height="60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ff7676;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#ff0000;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="dropShadow">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                    <feOffset dx="2" dy="2" result="offsetblur" />
+                    <feFlood flood-color="#000000" flood-opacity="0.3" />
+                    <feComposite in2="offsetblur" operator="in" />
+                    <feMerge>
+                        <feMergeNode />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                    </filter>
+                </defs>
+                
+                <path d="M100 180 
+                            C 140 140, 195 100, 180 60 
+                            C 165 20, 120 20, 100 50
+                            C 80 20, 35 20, 20 60
+                            C 5 100, 60 140, 100 180 Z" 
+                        fill="url(#heartGradient)" 
+                        stroke="#ff3333" 
+                        stroke-width="5"
+                        filter="url(#dropShadow)" />
+                
+                <ellipse cx="65" cy="70" rx="20" ry="25" 
+                            fill="#ffffff" 
+                            fill-opacity="0.7" 
+                            transform="rotate(-20 65 70)" />
+            </svg>
+            <div id="lifeGauge" class="gauge"></div>
+        </div>
+    </header>
+
+    
+      
+
+
+
+    <!-- ボディー -->
+    <main id="bookContent">
+        <div class="page" id="page1">
+            <h2>Webデザインとは？</h2>
+            <p>Webデザインは、ユーザーインターフェース、レイアウト、色、フォント、グラフィックスの選択などを通じて、視覚的に魅力的で機能的なウェブサイトを作成するプロセスです。ウェブサイトのデザインは、単に見た目の美しさだけでなく、機能性やユーザビリティも重要視されます。例えば、訪問者が簡単にナビゲートできるように、ナビゲーションバーやメニューの配置が考慮されます。また、色彩の選択も重要で、色が訪問者に与える印象や感情に影響を与えることがあります。</p>
+            <p>さらに、フォントの選択もデザインの一部であり、可読性を高め、ブランドのトーンやメッセージを伝えるために使用されます。例えば、サンセリフ体のフォントはモダンでクリーンな印象を与える一方で、セリフ体のフォントは伝統的でフォーマルな印象を与えることができます。Webデザインは、視覚的要素と機能的要素のバランスを取り、訪問者がウェブサイトを使いやすく、情報を効率的に探せるようにすることが目指されています。</p>
+            
+        </div>
+        <div class="page" id="page2">
+            <h2>ユーザーエクスペリエンス (UX) の重要性</h2>
+            <p>優れたWebデザインは、単に美しいだけでなく、ユーザーエクスペリエンス (UX) を重視しています。UXデザインは、ユーザーがウェブサイトをどのように利用し、情報を得るかを考慮して、直感的でシームレスな体験を提供することを目的としています。たとえば、クリック可能な要素が大きく、タッチスクリーンデバイスでも操作しやすいように設計されている場合、それは良いUXデザインの一例です。</p>
+            <p>また、訪問者がウェブサイトを利用する際に、ページの読み込み速度やナビゲーションの簡潔さもUXに影響を与えます。遅い読み込み時間や複雑なナビゲーションは、ユーザーをイライラさせ、サイトを離れる原因となります。そのため、UXデザインでは、ユーザーができるだけ少ないクリックで目的の情報にたどり着けるように、情報の配置やレイアウトを慎重に設計します。UXデザインは、訪問者がウェブサイトを再度訪れる理由を提供する重要な要素です。</p>
+        </div>
+        <div class="page" id="page3">
+            <h2>レスポンシブデザイン</h2>
+            <p>現代のWebデザインでは、レスポンシブデザインが不可欠です。これは、デバイスや画面サイズに関係なく、ウェブサイトが適切に表示されるようにするための手法です。レスポンシブデザインでは、CSSメディアクエリを使用して、画面の幅に応じてレイアウトやスタイルを動的に調整します。これにより、スマートフォンやタブレットからデスクトップPCまで、すべてのデバイスで一貫した体験を提供します。</p>
+            <p>さらに、レスポンシブデザインでは、画像やテキストのサイズも調整され、ユーザーがどのデバイスを使用しても快適に閲覧できるようにします。例えば、大きなデスクトップモニターでは複数列のレイアウトが表示される一方で、小さなスマートフォンの画面では単一列のレイアウトに自動的に切り替わります。これにより、ユーザーはデバイスに関係なく、スムーズにコンテンツを閲覧でき、快適なユーザー体験を提供することができます。</p>
+        </div>
+        <div class="page" id="page4">
+            <h2>色彩とタイポグラフィー</h2>
+            <p>Webデザインにおいて、色彩とタイポグラフィーは重要な要素です。色は感情や印象を伝えるために使用され、タイポグラフィーは可読性を高め、ブランドのトーンを伝えます。例えば、青色は信頼感やプロフェッショナリズムを伝えるのに適しており、赤色は緊急性や興奮を喚起することができます。適切な色の組み合わせを選ぶことで、ユーザーに強い印象を与えることができます。</p>
+            <p>また、タイポグラフィーもWebデザインの重要な要素です。異なるフォントを組み合わせて使用することで、視覚的な階層や強調を生み出すことができます。例えば、タイトルには太字のフォントを使用し、本文には読みやすいサンセリフ体を使用することが一般的です。これにより、ユーザーが情報を効率的に処理しやすくなります。タイポグラフィーと色彩を適切に組み合わせることで、ウェブサイト全体のデザインが一貫し、魅力的なものとなります。</p>
+        </div>
+        <div class="page" id="page5">
+            <h2>アクセシビリティとパフォーマンス</h2>
+            <p>アクセシビリティは、すべてのユーザーがウェブサイトにアクセスしやすいように設計することを意味します。これには、視覚障害者や聴覚障害者など、特定のニーズを持つユーザーが含まれます。例えば、スクリーンリーダーに対応したテキストの提供や、色覚異常のあるユーザーが正確に色を認識できるように配慮したデザインが含まれます。また、キーボードだけでナビゲートできるようにすることも重要です。</p>
+            <p>さらに、パフォーマンスもWebデザインの重要な要素です。ページの読み込み速度やレスポンスの速さは、ユーザー体験に大きく影響します。遅いウェブサイトはユーザーを失望させ、結果として訪問者が減少する可能性があります。そのため、画像の最適化やキャッシュの利用、必要なスクリプトの最小化など、パフォーマンスを向上させるためのさまざまな手法が用いられます。これらを最適化することは、成功するWebデザインの鍵です。</p>
+        </div>
+        <div class="page" id="page6">
+            <div class="finish-screen">
+                <h2>FINISH!</h2>
+                <p>おめでとうございます！ウェブデザインに関する本のすべてのページを読み終えました。ここまでの学びを通じて、Webデザインの基本的な概念や技術について理解が深まったことでしょう。実際のプロジェクトに取り組む際には、これまで学んだ知識を活かして、より優れたウェブサイトを作成することができるでしょう。</p>
+                <p>Webデザインは常に進化しており、新しいトレンドや技術が次々に登場しています。学び続けることが重要ですので、最新の情報や技術を追い続け、スキルを磨き続けましょう。次回のプロジェクトでも、今回の学びをぜひ活かしてください。ありがとうございました！</p>
+                <button id="finishButton">FINISH</button>
+                <div class="center"><a href="rankConfirm.html">コインの所持枚数を確認する</a></div>            
+                <div id="coins-container">
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- フッター -->
+    <footer>
+        <span id="pageNumber">1/5</span>
+    </footer>
+
+    <!-- 矢印ボタン -->
+    <div class="arrow left-arrow">&#9664;</div>
+    <div class="arrow right-arrow">&#9654;</div>
+
+    <audio id="coinSound" src="coin-sound.wav" hidden></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
